@@ -4,7 +4,7 @@
     tools:context="edu.psu.bd.spart.HomeActivity">
     <item
         android:id="@+id/action_directory"
-        android:icon="@drawable/ic_folder"
+        android:icon="@drawable/ic_folder_24dp"
         android:title="@string/action_directory"
         app:showAsAction="always" />
     <item

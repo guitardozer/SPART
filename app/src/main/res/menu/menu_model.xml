@@ -3,9 +3,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="edu.psu.bd.spart.ModelActivity">
     <item
-        android:id="@+id/action_directory"
-        android:icon="@drawable/ic_folder"
-        android:title="@string/action_directory"
+        android:id="@+id/action_save"
+        android:icon="@drawable/ic_save_24dp"
+        android:title="@string/action_save"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/action_cancel"
+        android:icon="@drawable/ic_cancel_24dp"
+        android:title="@string/action_cancel"
         app:showAsAction="always" />
     <item
         android:id="@+id/action_settings"
