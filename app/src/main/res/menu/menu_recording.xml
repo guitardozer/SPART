@@ -1,12 +1,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="edu.psu.bd.spart.HomeActivity">
-    <item
-        android:id="@+id/action_directory"
-        android:icon="@drawable/ic_folder_24dp"
-        android:title="@string/action_directory"
-        app:showAsAction="always" />
+    tools:context="edu.psu.bd.spart.RecordingActivity">
     <item
         android:id="@+id/action_settings"
         android:orderInCategory="100"

@@ -18,6 +18,18 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".RecordingActivity"
+            android:label="@string/title_activity_recording"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ModelActivity"
+            android:label="@string/title_activity_model"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".DirectoryActivity"
+            android:label="@string/title_activity_directory"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
