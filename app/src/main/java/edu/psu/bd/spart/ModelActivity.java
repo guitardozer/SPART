@@ -8,7 +8,11 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.View;
 
+import com.gordonwong.materialsheetfab.MaterialSheetFab;
+
 public class ModelActivity extends AppCompatActivity {
+
+    MaterialSheetFab materialSheetFab;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,14 +21,15 @@ public class ModelActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+        FloatingActionButtonList fab = (FloatingActionButtonList) findViewById(R.id.fab);
+        View sheetView = findViewById(R.id.fab_sheet);
+        View overlay = findViewById(R.id.overlay);
+        int sheetColor = getResources().getColor(R.color.colorPrimary);
+        int fabColor = getResources().getColor(R.color.colorAccent);
+
+        // Initialize material sheet FAB
+        materialSheetFab = new MaterialSheetFab<>(fab, sheetView, overlay,
+                sheetColor, fabColor);
     }
 
     @Override
@@ -32,5 +37,14 @@ public class ModelActivity extends AppCompatActivity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_model, menu);
         return true;
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (materialSheetFab.isSheetVisible()) {
+            materialSheetFab.hideSheet();
+        } else {
+            super.onBackPressed();
+        }
     }
 }
