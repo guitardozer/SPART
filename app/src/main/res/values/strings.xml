@@ -4,7 +4,4 @@
     <string name="action_directory">Directory</string>
     <string name="action_save">Save</string>
     <string name="action_cancel">Cancel</string>
-    <string name="title_activity_recording">RecordingActivity</string>
-    <string name="title_activity_model">ModelActivity</string>
-    <string name="title_activity_directory">DirectoryActivity</string>
 </resources>

@@ -45,6 +45,11 @@ public class HomeActivity extends AppCompatActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
+        if (id == R.id.action_directory) {
+            transitDirectory();
+            return true;
+        }
+
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
@@ -55,6 +60,11 @@ public class HomeActivity extends AppCompatActivity {
 
     public void transitRecord(View view){
         Intent intent = new Intent(this, RecordingActivity.class);
+        startActivity(intent);
+    }
+
+    public void transitDirectory(){
+        Intent intent = new Intent(this, DirectoryActivity.class);
         startActivity(intent);
     }
 }

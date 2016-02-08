@@ -1,5 +1,6 @@
 package edu.psu.bd.spart;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -21,8 +22,7 @@ public class RecordingActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                transitModel(view);
             }
         });
     }
@@ -32,5 +32,10 @@ public class RecordingActivity extends AppCompatActivity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_recording, menu);
         return true;
+    }
+
+    public void transitModel(View view){
+        Intent intent = new Intent(this, ModelActivity.class);
+        startActivity(intent);
     }
 }
