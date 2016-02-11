@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:fab="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -31,37 +32,41 @@
         android:layout_margin="@dimen/fab_margin"
         android:src="@drawable/ic_add_circle_24dp" />-->
 
-    <!-- Your FAB implementation -->
-    <edu.psu.bd.spart.FloatingActionButtonList
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/fab_margin"
-        android:src="@drawable/ic_add_circle_24dp" />
-
-    <!-- Overlay that dims the screen -->
-    <com.gordonwong.materialsheetfab.DimOverlayFrameLayout
-        android:id="@+id/overlay"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-
-    <!-- Circular reveal container for the sheet -->
-    <io.codetail.widget.RevealLinearLayout
+    <com.github.clans.fab.FloatingActionMenu
+        android:id="@+id/menu1"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="end|bottom"
-        android:orientation="vertical">
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:paddingRight="10dp"
+        android:paddingBottom="10dp"
+        android:paddingLeft="10dp"
+        fab:menu_labels_ellipsize="end"
+        fab:menu_labels_singleLine="true"
+        fab:menu_colorNormal="#1464f6"
+        fab:menu_colorPressed="#1346a4"
+        fab:menu_fab_label="@string/option_cancel">
 
-        <!-- Sheet that contains your items -->
-        <android.support.v7.widget.CardView
-            android:id="@+id/fab_sheet"
-            android:layout_width="250dp"
-            android:layout_height="300dp">
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/fab1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_add_location_black_24px"
+            fab:fab_size="mini"
+            fab:fab_colorNormal="#1464f6"
+            fab:fab_colorPressed="#1346a4"
+            fab:fab_label="@string/point_measure" />
 
-            <!-- TODO: Put your sheet items here -->
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/fab2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_note_add_24dp"
+            fab:fab_size="mini"
+            fab:fab_colorNormal="#1464f6"
+            fab:fab_colorPressed="#1346a4"
+            fab:fab_label="@string/point_note" />
 
-        </android.support.v7.widget.CardView>
-    </io.codetail.widget.RevealLinearLayout>
+    </com.github.clans.fab.FloatingActionMenu>
 
 </android.support.design.widget.CoordinatorLayout>
