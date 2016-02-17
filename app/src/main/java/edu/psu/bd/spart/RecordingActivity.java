@@ -12,9 +12,12 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.app.Activity;
 
 import com.google.atap.tangoservice.Tango;
 import com.google.atap.tangoservice.Tango.OnTangoUpdateListener;
+import com.google.atap.tangoservice.TangoCameraIntrinsics;
+import com.google.atap.tangoservice.TangoCameraPreview;
 import com.google.atap.tangoservice.TangoConfig;
 import com.google.atap.tangoservice.TangoCoordinateFramePair;
 import com.google.atap.tangoservice.TangoErrorException;
@@ -24,6 +27,7 @@ import com.google.atap.tangoservice.TangoPoseData;
 import com.google.atap.tangoservice.TangoXyzIjData;
 
 import java.util.ArrayList;
+
 
 public class RecordingActivity extends AppCompatActivity {
 
@@ -43,15 +47,22 @@ public class RecordingActivity extends AppCompatActivity {
 
     private Tango mTango;
     private TangoConfig mConfig;
-    private boolean mIsTangoServiceConnected;
+    private boolean mIsConnected;
+
+    private TangoCameraPreview tangoCameraPreview;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_recording);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        //setContentView(R.layout.activity_recording);
+        tangoCameraPreview = new TangoCameraPreview(this);
+        // Instantiate Tango client
+        mTango = new Tango(this);
+        setContentView(tangoCameraPreview);
+        //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        //setSupportActionBar(toolbar);
 
+        /*
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -59,8 +70,7 @@ public class RecordingActivity extends AppCompatActivity {
                 transitModel(view);
             }
         });
-        // Instantiate Tango client
-        mTango = new Tango(this);
+        */
 
         // Set up Tango configuration for motion tracking
         // If you want to use other APIs, add more appropriate to the config
@@ -70,14 +80,66 @@ public class RecordingActivity extends AppCompatActivity {
 
     }
 
+    // Camera Preview
+    private void startCameraPreview() {
+        // Connect to color camera
+        tangoCameraPreview.connectToTangoCamera(mTango,
+                TangoCameraIntrinsics.TANGO_CAMERA_COLOR);
+        // Use default configuration for Tango Service.
+        TangoConfig config = mTango.getConfig(TangoConfig.CONFIG_TYPE_DEFAULT);
+        mTango.connect(config);
+        mIsConnected = true;
+
+        // No need to add any coordinate frame pairs since we are not using
+        // pose data. So just initialize.
+        ArrayList<TangoCoordinateFramePair> framePairs = new ArrayList<TangoCoordinateFramePair>();
+        mTango.connectListener(framePairs, new OnTangoUpdateListener() {
+            @Override
+            public void onPoseAvailable(TangoPoseData pose) {
+                // We are not using OnPoseAvailable for this app
+            }
+
+            @Override
+            public void onFrameAvailable(int cameraId) {
+
+                // Check if the frame available is for the camera we want and
+                // update its frame on the camera preview.
+                if (cameraId == TangoCameraIntrinsics.TANGO_CAMERA_COLOR) {
+                    tangoCameraPreview.onFrameAvailable();
+                }
+            }
+
+            @Override
+            public void onXyzIjAvailable(TangoXyzIjData xyzIj) {
+                // We are not using OnPoseAvailable for this app
+            }
+
+            @Override
+            public void onTangoEvent(TangoEvent event) {
+                // We are not using OnPoseAvailable for this app
+            }
+        });
+    }
+
+
     @Override
     protected void onResume() {
         super.onResume();
         // Lock the Tango configuration and reconnect to the service each time
         // the app
         // is brought to the foreground.
-        super.onResume();
-        if (!mIsTangoServiceConnected) {
+
+        try {
+            if (!mIsConnected) {
+                startCameraPreview();
+            }
+        } catch (TangoOutOfDateException e) {
+            //Toast.makeText(getApplicationContext(), R.string.TangoOutOfDateException,
+              //      Toast.LENGTH_SHORT).show();
+        } catch (TangoErrorException e) {
+            //Toast.makeText(getApplicationContext(), R.string.TangoError, Toast.LENGTH_SHORT).show();
+        }
+        if (!mIsConnected) {
             try {
                 setTangoListeners();
             } catch (TangoErrorException e) {
@@ -86,7 +148,7 @@ public class RecordingActivity extends AppCompatActivity {
             }
             try {
                 mTango.connect(mConfig);
-                mIsTangoServiceConnected = true;
+                mIsConnected = true;
             } catch (TangoOutOfDateException e) {
                 Toast.makeText(getApplicationContext(),
                         "Tango Service out of date!", Toast.LENGTH_SHORT)
@@ -102,12 +164,16 @@ public class RecordingActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
+        if(mIsConnected) {
+            tangoCameraPreview.disconnectFromTangoCamera();
+            mIsConnected = false;
+        }
         // When the app is pushed to the background, unlock the Tango
         // configuration and disconnect
         // from the service so that other apps will behave properly.
         try {
             mTango.disconnect();
-            mIsTangoServiceConnected = false;
+            mIsConnected = false;
         } catch (TangoErrorException e) {
             Toast.makeText(getApplicationContext(), "Tango Error!",
                     Toast.LENGTH_SHORT).show();
@@ -161,8 +227,8 @@ public class RecordingActivity extends AppCompatActivity {
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            //mRotationTextView.setText(rotationMsg);
-                            //mTranslationTextView.setText(translationMsg);
+                            mRotationTextView.setText(rotationMsg);
+                            mTranslationTextView.setText(translationMsg);
                         }
                     });
                 }

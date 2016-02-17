@@ -24,14 +24,6 @@
 
     <include layout="@layout/content_model" />
 
-    <!--<android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/fab_margin"
-        android:src="@drawable/ic_add_circle_24dp" />-->
-
     <com.github.clans.fab.FloatingActionMenu
         android:id="@+id/menu1"
         android:layout_width="match_parent"
