@@ -12,4 +12,9 @@
     tools:context="edu.psu.bd.spart.DirectoryActivity"
     tools:showIn="@layout/activity_directory">
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="File storage test.\n\nPress the + button to create a file in the testfiles directory.\n\nIf the directory does not exist, it will be created." />
+
 </RelativeLayout>
