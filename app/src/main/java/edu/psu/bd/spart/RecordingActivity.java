@@ -1,6 +1,7 @@
 package edu.psu.bd.spart;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -54,15 +55,11 @@ public class RecordingActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //setContentView(R.layout.activity_recording);
-        tangoCameraPreview = new TangoCameraPreview(this);
-        // Instantiate Tango client
-        mTango = new Tango(this);
-        setContentView(tangoCameraPreview);
-        //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        //setSupportActionBar(toolbar);
 
-        /*
+        setContentView(R.layout.activity_recording);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,7 +67,12 @@ public class RecordingActivity extends AppCompatActivity {
                 transitModel(view);
             }
         });
-        */
+
+        tangoCameraPreview = (TangoCameraPreview)findViewById(R.id.videoOverLay);
+        // Instantiate Tango client
+        mTango = new Tango(this);
+        //setContentView(tangoCameraPreview);
+
 
         // Set up Tango configuration for motion tracking
         // If you want to use other APIs, add more appropriate to the config
