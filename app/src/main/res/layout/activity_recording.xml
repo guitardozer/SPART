@@ -7,7 +7,7 @@
     android:fitsSystemWindows="true"
     tools:context="edu.psu.bd.spart.RecordingActivity">
 
-    <android.support.design.widget.AppBarLayout
+    <!--<android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:theme="@style/AppTheme.AppBarOverlay">
@@ -19,12 +19,12 @@
             android:background="?attr/colorPrimaryDark"
             app:popupTheme="@style/AppTheme.PopupOverlay" />
 
-    </android.support.design.widget.AppBarLayout>
+    </android.support.design.widget.AppBarLayout>-->
 
     <com.google.atap.tangoservice.TangoCameraPreview
         android:id="@+id/videoOverLay"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="wrap_content" />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
