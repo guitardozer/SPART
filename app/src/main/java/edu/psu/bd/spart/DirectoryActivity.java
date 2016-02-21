@@ -18,6 +18,8 @@ import java.io.IOException;
 
 import android.app.Activity;
 import android.os.Environment;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.content.Context;
 import android.widget.Toast;
@@ -28,7 +30,11 @@ import java.util.Date;
 
 public class DirectoryActivity extends AppCompatActivity {
 
-    private static final String DNAME = "testfiles";
+    private static String DNAME = "testfiles";
+    private static String FILENAME = "data";
+
+    EditText mEditDirectory, mEditFilename;
+    Button mButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +51,22 @@ public class DirectoryActivity extends AppCompatActivity {
                 saveFile();
             }
         });
+
+        mButton = (Button)findViewById(R.id.button);
+        mEditDirectory   = (EditText)findViewById(R.id.edit_directory);
+        mEditFilename   = (EditText)findViewById(R.id.edit_filename);
+
+        mButton.setOnClickListener(
+                new View.OnClickListener()
+                {
+                    public void onClick(View view)
+                    {
+                        Log.d("EditDirectory", mEditDirectory.getText().toString());
+                        DNAME=mEditDirectory.getText().toString();
+                        Log.d("EditFilename", mEditFilename.getText().toString());
+                        FILENAME=mEditFilename.getText().toString();
+                    }
+                });
     }
 
     @Override
@@ -61,7 +83,7 @@ public class DirectoryActivity extends AppCompatActivity {
     private void saveFile()
     {
         String timestamp = new SimpleDateFormat("yyyMMdd_HHmmss").format(new Date());
-        String FILENAME = "data_"+timestamp+".txt";
+        FILENAME = FILENAME+"_"+timestamp+".txt";
 
         File rootPath = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS), DNAME);
         if(!rootPath.exists()) {
