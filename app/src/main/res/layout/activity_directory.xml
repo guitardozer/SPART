@@ -32,5 +32,23 @@
         android:layout_margin="@dimen/fab_margin"
         android:scaleType="center"
         android:src="@drawable/ic_add_circle_24dp" />
-
+    <EditText android:id="@+id/edit_directory"
+        android:layout_weight="1"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:layout_gravity="center_horizontal|left"
+        android:hint="Directory name" />
+    <EditText android:id="@+id/edit_filename"
+        android:layout_weight="1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:layout_gravity="center_horizontal|right"
+        android:hint="Filename" />
+    <Button android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="Send"/>
 </android.support.design.widget.CoordinatorLayout>

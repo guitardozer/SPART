@@ -9,6 +9,9 @@ import android.support.v4.app.NavUtils;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Menu;
+import android.view.inputmethod.InputMethodManager;
+import android.view.View.OnTouchListener;
+import android.view.MotionEvent;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -23,6 +26,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.content.Context;
 import android.widget.Toast;
+
 
 import android.util.Log;
 import java.text.SimpleDateFormat;
@@ -67,7 +71,27 @@ public class DirectoryActivity extends AppCompatActivity {
                         FILENAME=mEditFilename.getText().toString();
                     }
                 });
+
+        mEditFilename.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    hideKeyboard(v);
+                }
+            }
+        });
+        mEditDirectory.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    hideKeyboard(v);
+                }
+            }
+        });
     }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -123,6 +147,12 @@ public class DirectoryActivity extends AppCompatActivity {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private void hideKeyboard(View view) {
+        InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(mEditDirectory.getWindowToken(), 0);
+        imm.hideSoftInputFromWindow(mEditFilename.getWindowToken(), 0);
     }
 }
 
