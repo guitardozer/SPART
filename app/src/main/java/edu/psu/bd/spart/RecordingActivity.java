@@ -86,6 +86,7 @@ public class RecordingActivity extends AppCompatActivity {
     // Camera Preview
     private void startCameraPreview() {
         // Connect to color camera
+
         tangoCameraPreview.connectToTangoCamera(mTango,
                 TangoCameraIntrinsics.TANGO_CAMERA_COLOR);
         // Use default configuration for Tango Service.
@@ -96,10 +97,47 @@ public class RecordingActivity extends AppCompatActivity {
         // No need to add any coordinate frame pairs since we are not using
         // pose data. So just initialize.
         ArrayList<TangoCoordinateFramePair> framePairs = new ArrayList<TangoCoordinateFramePair>();
+        framePairs.add(new TangoCoordinateFramePair(
+                TangoPoseData.COORDINATE_FRAME_START_OF_SERVICE,
+                TangoPoseData.COORDINATE_FRAME_DEVICE));
         mTango.connectListener(framePairs, new OnTangoUpdateListener() {
             @Override
             public void onPoseAvailable(TangoPoseData pose) {
-                // We are not using OnPoseAvailable for this app
+                // Format Translation and Rotation data
+                final String translationMsg = String.format(sTranslationFormat,
+                        pose.translation[0], pose.translation[1],
+                        pose.translation[2]);
+                final String rotationMsg = String.format(sRotationFormat,
+                        pose.rotation[0], pose.rotation[1], pose.rotation[2],
+                        pose.rotation[3]);
+
+                // Output to LogCat
+                String logMsg = translationMsg + " | " + rotationMsg;
+                Log.d(TAG, logMsg);
+
+                final double deltaTime = (pose.timestamp - mPreviousTimeStamp)
+                        * SECS_TO_MILLISECS;
+                mPreviousTimeStamp = pose.timestamp;
+                mTimeToNextUpdate -= deltaTime;
+
+                // Throttle updates to the UI based on UPDATE_INTERVAL_MS.
+                if (mTimeToNextUpdate < 0.0) {
+                    mTimeToNextUpdate = UPDATE_INTERVAL_MS;
+
+                    // Display data in TextViews. This must be done inside a
+                    // runOnUiThread call because
+                    // it affects the UI, which will cause an error if performed
+                    // from the Tango
+                    // service thread
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            //mRotationTextView.setText(rotationMsg);
+                            //mTranslationTextView.setText(translationMsg);
+                        }
+                    });
+                }
+
             }
 
             @Override
@@ -189,71 +227,7 @@ public class RecordingActivity extends AppCompatActivity {
     }
 
     private void setTangoListeners() {
-        // Select coordinate frame pairs
-        ArrayList<TangoCoordinateFramePair> framePairs = new ArrayList<TangoCoordinateFramePair>();
-        framePairs.add(new TangoCoordinateFramePair(
-                TangoPoseData.COORDINATE_FRAME_START_OF_SERVICE,
-                TangoPoseData.COORDINATE_FRAME_DEVICE));
 
-        // Add a listener for Tango pose data
-        mTango.connectListener(framePairs, new Tango.OnTangoUpdateListener() {
-
-            @SuppressLint("DefaultLocale")
-            @Override
-            public void onPoseAvailable(TangoPoseData pose) {
-                // Format Translation and Rotation data
-                final String translationMsg = String.format(sTranslationFormat,
-                        pose.translation[0], pose.translation[1],
-                        pose.translation[2]);
-                final String rotationMsg = String.format(sRotationFormat,
-                        pose.rotation[0], pose.rotation[1], pose.rotation[2],
-                        pose.rotation[3]);
-
-                // Output to LogCat
-                String logMsg = translationMsg + " | " + rotationMsg;
-                Log.i(TAG, logMsg);
-
-                final double deltaTime = (pose.timestamp - mPreviousTimeStamp)
-                        * SECS_TO_MILLISECS;
-                mPreviousTimeStamp = pose.timestamp;
-                mTimeToNextUpdate -= deltaTime;
-
-                // Throttle updates to the UI based on UPDATE_INTERVAL_MS.
-                if (mTimeToNextUpdate < 0.0) {
-                    mTimeToNextUpdate = UPDATE_INTERVAL_MS;
-
-                    // Display data in TextViews. This must be done inside a
-                    // runOnUiThread call because
-                    // it affects the UI, which will cause an error if performed
-                    // from the Tango
-                    // service thread
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            mRotationTextView.setText(rotationMsg);
-                            mTranslationTextView.setText(translationMsg);
-                        }
-                    });
-                }
-            }
-
-            @Override
-            public void onXyzIjAvailable(TangoXyzIjData arg0) {
-                // Ignoring XyzIj data
-            }
-
-            @Override
-            public void onTangoEvent(TangoEvent arg0) {
-                // Ignoring TangoEvents
-            }
-
-            @Override
-            public void onFrameAvailable(int arg0) {
-                // Ignoring onFrameAvailable Events
-
-            }
-
-        });
     }
 
     @Override
