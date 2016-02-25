@@ -56,11 +56,11 @@ public class DirectoryActivity extends AppCompatActivity {
             }
         });
 
-        mButton = (Button)findViewById(R.id.button);
+        //mButton = (Button)findViewById(R.id.button);
         mEditDirectory   = (EditText)findViewById(R.id.edit_directory);
         mEditFilename   = (EditText)findViewById(R.id.edit_filename);
 
-        mButton.setOnClickListener(
+       /* mButton.setOnClickListener(
                 new View.OnClickListener()
                 {
                     public void onClick(View view)
@@ -71,7 +71,7 @@ public class DirectoryActivity extends AppCompatActivity {
                         FILENAME=mEditFilename.getText().toString();
                     }
                 });
-
+*/
         mEditFilename.setOnFocusChangeListener(new View.OnFocusChangeListener() {
 
             @Override
@@ -107,7 +107,21 @@ public class DirectoryActivity extends AppCompatActivity {
     private void saveFile()
     {
         String timestamp = new SimpleDateFormat("yyyMMdd_HHmmss").format(new Date());
-        FILENAME = FILENAME+"_"+timestamp+".txt";
+        if(mEditFilename.getText().toString().matches(""))
+        {
+            FILENAME ="data"+"_"+timestamp+".txt";
+        }
+        else
+        {
+            FILENAME = mEditFilename.getText().toString()+"_"+timestamp+".txt";
+        }
+        if(mEditDirectory.getText().toString().matches(""))
+        {
+            DNAME ="testfiles";
+        }
+        else {
+            DNAME = mEditDirectory.getText().toString() + "_" + timestamp + ".txt";
+        }
 
         File rootPath = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS), DNAME);
         if(!rootPath.exists()) {
