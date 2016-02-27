@@ -69,6 +69,14 @@ public class RecordingActivity extends AppCompatActivity {
             }
         });
 
+        FloatingActionButton fabTest = (FloatingActionButton) findViewById(R.id.fabTest);
+        fabTest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                saveTest();
+            }
+        });
+
         tangoCameraPreview = (TangoCameraPreview)findViewById(R.id.videoOverLay);
         // Instantiate Tango client
         mTango = new Tango(this);
@@ -82,6 +90,8 @@ public class RecordingActivity extends AppCompatActivity {
         mConfig.putBoolean(TangoConfig.KEY_BOOLEAN_MOTIONTRACKING, true);
 
     }
+
+
 
     // Camera Preview
     private void startCameraPreview() {
@@ -240,5 +250,9 @@ public class RecordingActivity extends AppCompatActivity {
     public void transitModel(View view){
         Intent intent = new Intent(this, ModelActivity.class);
         startActivity(intent);
+    }
+
+    private void saveTest() {
+        
     }
 }
