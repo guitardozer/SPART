@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:surfaceview="http://schemas.android.com/apk/res-auto"
     xmlns:fab="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -22,7 +23,15 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <include layout="@layout/content_model" />
+    <!--<include layout="@layout/content_model" />-->
+
+    <org.rajawali3d.surface.RajawaliSurfaceView
+        android:id="@+id/rajwali_surface"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        surfaceview:frameRate="60.0"
+        surfaceview:renderMode="RENDER_WHEN_DIRTY"
+        surfaceview:isTransparent="true"/>
 
     <com.github.clans.fab.FloatingActionMenu
         android:id="@+id/menu1"

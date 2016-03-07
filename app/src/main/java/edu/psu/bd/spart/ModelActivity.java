@@ -13,13 +13,15 @@ import android.widget.Toast;
 import com.github.clans.fab.FloatingActionButton;
 import com.github.clans.fab.FloatingActionMenu;
 
-import java.util.ArrayList;
-import java.util.List;
+import org.rajawali3d.surface.IRajawaliSurface;
+import org.rajawali3d.surface.RajawaliSurfaceView;
 
 public class ModelActivity extends AppCompatActivity {
 
     private FloatingActionButton fab1;
     private FloatingActionButton fab2;
+
+    private ModelRender renderer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +29,11 @@ public class ModelActivity extends AppCompatActivity {
         setContentView(R.layout.activity_model);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        final RajawaliSurfaceView surface = (RajawaliSurfaceView) findViewById(R.id.rajwali_surface);
+
+        renderer = new ModelRender(this);
+        surface.setSurfaceRenderer(renderer);
 
         final FloatingActionMenu menu1 = (FloatingActionMenu) findViewById(R.id.menu1);
         menu1.setClosedOnTouchOutside(true);

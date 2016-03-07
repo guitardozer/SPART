@@ -28,4 +28,5 @@ dependencies {
     compile 'com.github.clans:fab:1.6.2'
     compile project(':TangoSupport_Izar_Java')
     compile project(':TangoUX_Izar_Java')
+    compile 'org.rajawali3d:rajawali:1.0.186-SNAPSHOT@aar'
 }
