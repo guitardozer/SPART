@@ -1,1 +1,1 @@
-include ':app', ':TangoSupport_Gemma_Java', ':TangoUX_Gemma_Java'
+include ':app', ':TangoSupport_Izar_Java', ':TangoUX_Izar_Java'
