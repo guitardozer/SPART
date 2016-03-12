@@ -14,6 +14,8 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.content.Intent;
+import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,6 +24,8 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 public class HomeActivity extends AppCompatActivity {
+
+    Button Skip;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +42,18 @@ public class HomeActivity extends AppCompatActivity {
                         .setAction("Action", null).show();*/
                 transitRecord(view);
 
+            }
+        });
+
+        Skip = (Button) findViewById(R.id.Skip);
+
+
+        Skip.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(HomeActivity.this, FileList.class);
+                startActivity(i);
+                finish();
             }
         });
     }
