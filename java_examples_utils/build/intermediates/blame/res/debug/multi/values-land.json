@@ -1,0 +1,64 @@
+[
+    {
+        "outputFile": "C:\\Users\\ctxcj_000\\Documents\\Semester 8\\CMPSC 485\\java_examples_utils\\build\\intermediates\\res\\merged\\debug\\values-land\\values-land.xml",
+        "map": [
+            {
+                "to": {
+                    "startLine": 2,
+                    "startColumn": 4,
+                    "startOffset": 55,
+                    "endColumn": 61,
+                    "endOffset": 112
+                },
+                "from": {
+                    "file": "C:\\Users\\ctxcj_000\\Documents\\Semester 8\\CMPSC 485\\java_examples_utils\\build\\intermediates\\exploded-aar\\CMPSC 485\\TangoUX_Gemma_Java\\unspecified\\res\\values-land\\values-land.xml",
+                    "position": {
+                        "startLine": 4,
+                        "startColumn": 4,
+                        "startOffset": 230,
+                        "endColumn": 61,
+                        "endOffset": 287
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 3,
+                    "startColumn": 4,
+                    "startOffset": 117,
+                    "endColumn": 55,
+                    "endOffset": 168
+                },
+                "from": {
+                    "file": "C:\\Users\\ctxcj_000\\Documents\\Semester 8\\CMPSC 485\\java_examples_utils\\build\\intermediates\\exploded-aar\\CMPSC 485\\TangoUX_Gemma_Java\\unspecified\\res\\values-land\\values-land.xml",
+                    "position": {
+                        "startLine": 5,
+                        "startColumn": 4,
+                        "startOffset": 292,
+                        "endColumn": 55,
+                        "endOffset": 343
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 4,
+                    "startColumn": 4,
+                    "startOffset": 173,
+                    "endColumn": 54,
+                    "endOffset": 223
+                },
+                "from": {
+                    "file": "C:\\Users\\ctxcj_000\\Documents\\Semester 8\\CMPSC 485\\java_examples_utils\\build\\intermediates\\exploded-aar\\CMPSC 485\\TangoUX_Gemma_Java\\unspecified\\res\\values-land\\values-land.xml",
+                    "position": {
+                        "startLine": 6,
+                        "startColumn": 4,
+                        "startOffset": 348,
+                        "endColumn": 54,
+                        "endOffset": 398
+                    }
+                }
+            }
+        ]
+    }
+]

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- From: file:/home/ubuntu/jobs/redwood_internal/RedwoodInternal/Redwood/applications/android/tango-ux-support-library/res/values-land/dimens.xml -->
+    <eat-comment/>
+    <dimen name="hold_steady_bubble_level_max_y">15dp</dimen>
+    <dimen name="hold_steady_frame_height">61dp</dimen>
+    <dimen name="hold_steady_frame_width">96dp</dimen>
+</resources>
